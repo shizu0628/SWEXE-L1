@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
-  root "books#index"
-  resources :books
+  get 'top/main'
+  post 'top/login'
+  root 'top#main'
+  
+  # 実験用のルーティングが残っている場合はそのままでOK
+  get "application/L4"
 end
