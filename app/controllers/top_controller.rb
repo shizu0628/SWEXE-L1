@@ -8,8 +8,9 @@ class TopController < ApplicationController
   end
 
   def login
-    user = User.find_by(uid: params[:uid], pass: params[:pass])
-    if user
+    user = User.find_by(uid: params[:uid])
+    # BCryptを用いて保存されているハッシュと入力パスワードを比較
+    if user && BCrypt::Password.new(user.pass) == params[:pass]
       session[:login_uid] = user.uid
       redirect_to top_main_path
     else
