@@ -1,6 +1,6 @@
-<h2>ログイン</h2>
+<h1>ログイン</h1>
 
-<%= form_with url: '/top/login', data: { turbo: false } do |f| %>
+<%= form_with url: top_login_path, data: { turbo: false } do |f| %>
   <div>
     <%= f.label :uid, 'ユーザーID' %><br>
     <%= f.text_field :uid %>
