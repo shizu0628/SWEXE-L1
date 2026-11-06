@@ -1,0 +1,23 @@
+<h1>ツイート一覧</h1>
+
+<ul>
+  <% @tweets.each do |tweet| %>
+    <li>
+      <%= tweet.message %> (投稿者: <%= tweet.user.uid %>)
+      
+      <% current_user = User.find_by(uid: session[:login_uid]) %>
+      <% if current_user && current_user.like_tweets.include?(tweet) %>
+        <%= link_to 'いいね解除', tweet_likes_path(tweet), data: { turbo_method: :delete } %>
+      <% else %>
+        <%= link_to 'いいね', tweet_likes_path(tweet), data: { turbo_method: :post } %>
+      <% end %>
+      (いいね数: <%= tweet.likes.count %>)
+
+      <%= link_to '削除', tweet_path(tweet), data: { turbo_method: :delete } %>
+    </li>
+  <% end %>
+</ul>
+
+<p><%= link_to '新規ツイート作成', new_tweet_path %></p>
+<p><%= link_to 'ユーザー一覧へ', users_path %></p>
+<p><%= link_to 'ログアウト', top_logout_path %></p>

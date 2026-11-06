@@ -1,0 +1,13 @@
+<h1>新規ツイート</h1>
+
+<%= form_with model: Tweet.new do |f| %>
+  <p>
+    <%= f.label :message, "メッセージ" %><br>
+    <%= f.text_field :message %>
+  </p>
+  <p>
+    <%= f.submit "投稿" %>
+  </p>
+<% end %>
+
+<%= link_to '一覧に戻る', tweets_path %>

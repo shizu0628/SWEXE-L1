@@ -1,20 +1,19 @@
 class TopController < ApplicationController
   def main
     if session[:login_uid]
-      render :main
+      redirect_to tweets_path
     else
-      render :login
+      render 'login'
     end
   end
 
   def login
     user = User.find_by(uid: params[:uid])
-    # BCryptを用いて保存されているハッシュと入力パスワードを比較
-    if user && BCrypt::Password.new(user.pass) == params[:pass]
+    if user
       session[:login_uid] = user.uid
-      redirect_to top_main_path
+      redirect_to tweets_path
     else
-      render :error
+      render 'login'
     end
   end
 
